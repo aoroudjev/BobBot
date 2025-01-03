@@ -17,6 +17,7 @@ This is a simple Discord bot made for fun! It listens to messages, responds to c
 - `!test` - Sends a response.
 - `!update` - Updates the running bot to the latest commit and overwrites the process.
 
-## Notes
+## Restrictions
 - Python 3.13 removes a discordpy dependency from the std lib (audioop).
+- Must keep the main entry point named ```main.py```.
 
