@@ -14,8 +14,6 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 bot = commands.Bot(intents=intents, command_prefix="!")
 
-repo = ""
-
 
 # =========Events==========
 @bot.event
@@ -50,7 +48,7 @@ async def test(ctx) -> None:
 async def update(ctx) -> None:
     await ctx.channel.send("Updating... brb")
     try:
-        updater.update_self(repo)
+        updater.update_self()
         await ctx.channel.send("Done updating!")
         await bot.close()
     except Exception:

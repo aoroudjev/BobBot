@@ -4,9 +4,9 @@ import sys
 import git
 
 
-def update_self(repo_path):
+def update_self():
     """Pulls latest commit from repo."""
-    repo = git.Repo(repo_path)
+    repo = git.Repo()
     repo.remotes.origin.pull()
     print("Updated... restarting")
     _restart_program()
