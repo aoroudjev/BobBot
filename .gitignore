@@ -1,0 +1,5 @@
+/.venv/
+*.lock
+.python-version
+err.log
+.idea

@@ -1,0 +1,11 @@
+[project]
+name = "bobbot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.9,<3.13" # 3.13 removes audioop, a discord.py requirement
+dependencies = [
+    "discord>=2.3.2",
+    "gitpython>=3.1.44",
+    "ruff>=0.8.5",
+]
