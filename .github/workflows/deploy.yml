@@ -23,3 +23,11 @@ jobs:
           remote_path: './'
           sftp_only: true
           password: ${{ secrets.FTP_PASS }}
+
+      - name: Create and Upload Update Trigger
+        run: |
+          echo "triggering update" > update.trigger
+          sftp -oBatchMode=no -b - ${{ secrets.FTP_USER }}@${{ secrets.FTP_HOST }} << EOF
+          put update.trigger /path/to/your/bot/
+          bye
+          EOF
