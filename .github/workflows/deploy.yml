@@ -1,0 +1,25 @@
+name: FTP Deploy to Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    name: Deploy with Password
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Deploy with Password
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+        with:
+          username: ${{ secrets.FTP_USER }}
+          server: ${{ secrets.FTP_HOST}}
+          port: ${{ secrets.FTP_PORT }}
+          local_path: './'
+          remote_path: '/home/container/'
+          sftp_only: true
+          password: ${{ secrets.FTP_PASS }}
