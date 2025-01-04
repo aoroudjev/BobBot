@@ -58,16 +58,6 @@ async def test(ctx) -> None:
 
 
 @bot.command()
-async def update(ctx) -> None:
-    """Force update bot, don't wait for trigger."""
-    try:
-        updater.update_self()
-        await ctx.channel.send("Done updating!")
-        await bot.close()
-    except Exception:
-        raise
-
-@bot.command()
 async def echo(ctx, *args) -> None:
     await ctx.channel.send(" ".join(args))
 
