@@ -19,15 +19,21 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           server: ${{ secrets.FTP_HOST}}
           port: ${{ secrets.FTP_PORT }}
+          password: ${{ secrets.FTP_PASS }}
           local_path: './'
           remote_path: './'
           sftp_only: true
-          password: ${{ secrets.FTP_PASS }}
 
-      - name: Create and Upload Update Trigger
-        run: |
-          echo "triggering update" > update.trigger
-          sftp -oBatchMode=no -b - ${{ secrets.FTP_USER }}@${{ secrets.FTP_HOST }} << EOF
-          put update.trigger /path/to/your/bot/
-          bye
-          EOF
+      - name: Create Update Trigger Locally
+        run: echo "triggering update" > update.trigger
+
+      - name: Upload Update Trigger
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+        with:
+          username: ${{ secrets.FTP_USER }}
+          server: ${{ secrets.FTP_HOST }}
+          port: ${{ secrets.FTP_PORT }}
+          password: ${{ secrets.FTP_PASS }}
+          local_path: 'update.trigger'
+          remote_path: './'
+          sftp_only: true
