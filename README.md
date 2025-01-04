@@ -11,7 +11,7 @@ This is a simple Discord bot made for fun! It listens to messages, responds to c
 ## How to Run It
 1. Change the prefix symbol to something unique.
 2. Run bot.py
-3. Use `!test` to check if it's working.
+3. Use `<selected-prefix>test` to check if it's working.
 
 ## Commands
 - `!test` - Sends a response.
