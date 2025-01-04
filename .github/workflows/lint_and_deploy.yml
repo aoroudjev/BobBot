@@ -23,4 +23,4 @@ jobs:
   
         - name: Deploy to Server
           run: |
-            ssh lnr9bbne.8196da7a@23.27.211.92 "cd /home/container"
+            ssh lnr9bbne@23.27.211.92 "cd /home/container"
