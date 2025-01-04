@@ -1,5 +1,6 @@
 import asyncio
 import os
+import random
 
 import discord
 from discord.ext import commands
@@ -15,7 +16,8 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 bot = commands.Bot(intents=intents, command_prefix="!")
 
-TRIGGER_FILE = 'update.trigger'
+TRIGGER_FILE = "update.trigger"
+
 
 async def update_loop():
     while True:
@@ -24,6 +26,7 @@ async def update_loop():
             os.remove(TRIGGER_FILE)
             updater.restart_program()
         await asyncio.sleep(10)
+
 
 # =========Events==========
 @bot.event
@@ -60,6 +63,12 @@ async def test(ctx) -> None:
 @bot.command()
 async def echo(ctx, *args) -> None:
     await ctx.channel.send(" ".join(args))
+
+
+@bot.command()
+async def roll(ctx, max_roll: int = 100) -> None:
+    rand_roll = int(random.random() * max_roll)
+    await ctx.channel.send(rand_roll)
 
 
 bot.run(TOKEN)
