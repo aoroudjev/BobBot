@@ -18,5 +18,6 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
+          port: 2022
           local-dir: ./
           server-dir: /home/container/
