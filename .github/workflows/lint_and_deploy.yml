@@ -19,7 +19,7 @@ jobs:
             mkdir -p ~/.ssh
             echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
             chmod 600 ~/.ssh/id_ed25519
-            ssh-keyscan -H 23.27.211.92 >> ~/.ssh/known_hosts
+            ssh-keyscan -p 25240 23.27.211.92 >> ~/.ssh/known_hosts
   
         - name: Deploy to Server
           run: |
