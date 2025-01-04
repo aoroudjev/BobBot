@@ -1,7 +1,7 @@
 # Discord Bot - README
 
 ## What's This?
-This is a simple Discord bot made for fun! It listens to messages, responds to commands, and can restart itself if needed.
+Community support bot, meet Bob.
 
 ## How to Set It Up
 1. Get Python (3.8+). Must be < 3.13
