@@ -1,7 +1,6 @@
 import asyncio
 import os
 
-
 import discord
 from discord.ext import commands
 
@@ -21,7 +20,7 @@ TRIGGER_FILE = 'update.trigger'
 async def update_loop():
     while True:
         if os.path.exists(TRIGGER_FILE):
-            print("Update trigger detected... running update script.")
+            print("Update trigger detected... Restarting")
             os.remove(TRIGGER_FILE)
             updater.restart_program()
         await asyncio.sleep(10)
