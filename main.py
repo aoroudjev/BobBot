@@ -23,7 +23,7 @@ async def update_loop():
         if os.path.exists(TRIGGER_FILE):
             print("Update trigger detected... running update script.")
             os.remove(TRIGGER_FILE)
-            await asyncio.to_thread(updater.update_self)  # Run blocking code in thread-safe manner
+            updater.restart_program()
         await asyncio.sleep(10)
 
 # =========Events==========
