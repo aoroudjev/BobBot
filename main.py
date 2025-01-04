@@ -1,6 +1,6 @@
 import asyncio
 import os
-import time
+
 
 import discord
 from discord.ext import commands
@@ -42,7 +42,7 @@ async def on_error(event, *args) -> None:
 
 @bot.event
 async def on_ready() -> None:
-    """On start of bot"""
+    """On start of bot."""
     print(bot.guilds)
     guild = discord.utils.get(bot.guilds)
     print(f"{bot.user} is connected to the following guild: {guild}")
@@ -54,18 +54,23 @@ async def on_ready() -> None:
 # =========Commands==========
 @bot.command()
 async def test(ctx) -> None:
-    """Test command to check bot connectivity/functionality"""
+    """Test command to check bot connectivity/functionality."""
     await ctx.channel.send("Response! v3")
 
 
 @bot.command()
 async def update(ctx) -> None:
+    """Force update bot, don't wait for trigger."""
     try:
         updater.update_self()
         await ctx.channel.send("Done updating!")
         await bot.close()
     except Exception:
         raise
+
+@bot.command()
+async def echo(ctx, *args) -> None:
+    await ctx.channel.send(" ".join(args))
 
 
 bot.run(TOKEN)
