@@ -1,4 +1,6 @@
+import asyncio
 import os
+import time
 
 import discord
 from discord.ext import commands
@@ -14,6 +16,15 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 bot = commands.Bot(intents=intents, command_prefix="!")
 
+TRIGGER_FILE = 'update.trigger'
+
+async def update_loop():
+    while True:
+        if os.path.exists(TRIGGER_FILE):
+            print("Update trigger detected... running update script.")
+            os.remove(TRIGGER_FILE)
+            await asyncio.to_thread(updater.update_self)  # Run blocking code in thread-safe manner
+        await asyncio.sleep(10)
 
 # =========Events==========
 @bot.event
@@ -36,6 +47,9 @@ async def on_ready() -> None:
     guild = discord.utils.get(bot.guilds)
     print(f"{bot.user} is connected to the following guild: {guild}")
 
+    # Start the update loop as an async task
+    bot.loop.create_task(update_loop())
+
 
 # =========Commands==========
 @bot.command()
@@ -46,7 +60,6 @@ async def test(ctx) -> None:
 
 @bot.command()
 async def update(ctx) -> None:
-    await ctx.channel.send("Updating... brb")
     try:
         updater.update_self()
         await ctx.channel.send("Done updating!")
