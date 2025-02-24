@@ -22,9 +22,9 @@ def _get_json_data():
     with EMPLOYEE_JSON_PATH.open("r") as file:
         return json.load(file)
 
-def _update_json(new_data):
+def _update_json(new_data: dict):
+    _get_json_data().update(new_data)
     with EMPLOYEE_JSON_PATH.open("w") as file:
-        new_data.update(_get_json_data())
         json.dump(new_data, file)
 
 
@@ -75,10 +75,11 @@ class CompanyCog(Cock):
             await send_message(interaction, "Can't do that")
             return
 
-        json_data[user.id]["roles"].append(Role.MANAGER.value)
+        if has_role(str(user.id), Role.MANAGER):
+            await send_message(interaction, "Already Manager")
+            return
+
+        json_data[str(user.id)]["roles"].append(Role.MANAGER.value)
         _update_json(json_data)
         await send_message(interaction, "YAY! GRATSMAN")
-
-
-
 

@@ -10,12 +10,16 @@
     "id": 513894486263463956,
     "name": "anthonyll",
     "roles": [
-      "ADMIN"
+      "ADMIN",
+      "MANAGER",
+      "MANAGER"
     ]
   },
   "130501321534078976": {
     "id": 130501321534078976,
     "name": "cyanmoss",
-    "roles": []
+    "roles": [
+      "MANAGER"
+    ]
   }
 }
