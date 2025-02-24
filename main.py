@@ -1,13 +1,11 @@
-import asyncio
 import os
 import random
 
 import discord
-from dateutil import parser
 from discord.ext import commands
-from discord.ui import View, Select, Button
 
-from cogs.event_cog import EventCog
+from cogs.CompanyCog.company_cog import CompanyCog
+from cogs.EventCog.event_cog import EventCog
 
 from utils.updater import update_loop
 
@@ -40,10 +38,15 @@ async def on_error(event, *args) -> None:
 @bot.event
 async def on_ready() -> None:
     """On start of bot."""
+    # Add cogs
     await bot.add_cog(EventCog(bot))
+    await bot.add_cog(CompanyCog(bot))
     print(f"Ready! {bot.user}")
+
+    # Sync
     await bot.tree.sync()
     print("Bot is synced.")
+
     # Start the update loop as an async task
     bot.loop.create_task(update_loop())
 
