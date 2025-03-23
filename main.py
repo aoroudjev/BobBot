@@ -1,34 +1,27 @@
-import asyncio
 import os
 import random
 
 import discord
 from discord.ext import commands
 
-from utils import updater
+from cogs.CompanyCog.company_cog import CompanyCog
+from cogs.EventCog.event_cog import EventCog
+
+from utils.updater import update_loop
 
 TOKEN = os.getenv("TOKEN")
+
 
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 
-client = discord.Client(intents=intents)
-bot = commands.Bot(intents=intents, command_prefix="!")
+bot = commands.Bot(intents=intents, command_prefix="$")
 
-TRIGGER_FILE = "update.trigger"
-
-
-async def update_loop():
-    while True:
-        if os.path.exists(TRIGGER_FILE):
-            print("Update trigger detected... Restarting")
-            os.remove(TRIGGER_FILE)
-            updater.restart_program()
-        await asyncio.sleep(10)
 
 
 # =========Events==========
+
 @bot.event
 async def on_message(message) -> None:
     """Spawns on ANY message in overseen channels regardless of prefix."""
@@ -45,15 +38,21 @@ async def on_error(event, *args) -> None:
 @bot.event
 async def on_ready() -> None:
     """On start of bot."""
-    print(bot.guilds)
-    guild = discord.utils.get(bot.guilds)
-    print(f"{bot.user} is connected to the following guild: {guild}")
+    # Add cogs
+    await bot.add_cog(EventCog(bot))
+    await bot.add_cog(CompanyCog(bot))
+    print(f"Ready! {bot.user}")
+
+    # Sync
+    await bot.tree.sync()
+    print("Bot is synced.")
 
     # Start the update loop as an async task
     bot.loop.create_task(update_loop())
 
 
 # =========Commands==========
+
 @bot.command()
 async def test(ctx) -> None:
     """Test command to check bot connectivity/functionality."""

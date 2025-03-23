@@ -1,4 +1,4 @@
-# Discord Bot - README
+# BobBot
 
 ## What's This?
 Community support bot, meet Bob.
@@ -20,4 +20,3 @@ Community support bot, meet Bob.
 ## Restrictions
 - Python 3.13 removes a discordpy dependency from the std lib (audioop).
 - Must keep the main entry point named ```main.py```.
-
