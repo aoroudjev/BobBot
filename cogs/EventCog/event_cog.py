@@ -4,7 +4,7 @@ from typing import Optional
 from dateutil import parser
 
 import discord
-from discord import User, DMChannel, app_commands
+from discord import User, DMChannel, app_commands, InteractionResponse
 from discord.ext import commands
 
 
@@ -104,8 +104,6 @@ class EventCog(commands.Cog):
         embed.set_footer(text="Note: relative days like today and tomorrow doesn't work")
         response = await self.get_user_input(interaction.user, None, embed)
         date_time = self.get_time_and_date(response.content)
-
-
 
         embed = discord.Embed(
             title="Confirmation",

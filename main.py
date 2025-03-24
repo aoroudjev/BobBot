@@ -6,18 +6,18 @@ from discord.ext import commands
 
 from cogs.CompanyCog.company_cog import CompanyCog
 from cogs.EventCog.event_cog import EventCog
+from cogs.HeardleCog.heardle_cog import HeardleCog
 
 from utils.updater import update_loop
 
-TOKEN = os.getenv("TOKEN")
-
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+SPOTIFY_TOKEN = os.getenv("SPOTIFY_TOKEN")
 
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 
 bot = commands.Bot(intents=intents, command_prefix="$")
-
 
 
 # =========Events==========
@@ -32,7 +32,7 @@ async def on_message(message) -> None:
 async def on_error(event, *args) -> None:
     """Log on error."""
     with open("err.log", "a") as f:
-        f.write(f"Error: {args[0]}\n")
+        f.write(f"Error {event}: {args[0]}\n")
 
 
 @bot.event
@@ -41,6 +41,8 @@ async def on_ready() -> None:
     # Add cogs
     await bot.add_cog(EventCog(bot))
     await bot.add_cog(CompanyCog(bot))
+    await bot.add_cog(HeardleCog(bot))
+
     print(f"Ready! {bot.user}")
 
     # Sync
@@ -70,4 +72,4 @@ async def roll(ctx, max_roll: int = 100) -> None:
     await ctx.channel.send(rand_roll)
 
 
-bot.run(TOKEN)
+bot.run(DISCORD_TOKEN)
