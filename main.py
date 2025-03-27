@@ -3,6 +3,7 @@ import random
 
 import discord
 from discord.ext import commands
+from spotipy import SpotifyOAuth, Spotify, SpotifyClientCredentials
 
 from cogs.CompanyCog.company_cog import CompanyCog
 from cogs.EventCog.event_cog import EventCog
@@ -11,7 +12,7 @@ from cogs.HeardleCog.heardle_cog import HeardleCog
 from utils.updater import update_loop
 
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
-SPOTIFY_TOKEN = os.getenv("SPOTIFY_TOKEN")
+
 
 intents = discord.Intents.default()
 intents.members = True
